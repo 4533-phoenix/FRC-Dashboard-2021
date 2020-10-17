@@ -1,6 +1,7 @@
 import wx
 from app import App
 from image import ImagePanel
+from buttons import ButtonsPanel
 
 class MainFrame(wx.Frame):
     def __init__(self, parent, title):
@@ -13,14 +14,21 @@ class MainFrame(wx.Frame):
         
 
     def build(self):
-        gbs = wx.GridBagSizer(1, 1)
+        gbs = wx.GridBagSizer(2, 1)
         mainPanel = wx.Panel(self)
         mainPanel.SetSizer(gbs)
 
         gbs.Add(
             ImagePanel(mainPanel),
             wx.GBPosition(0,0),
-            wx.GBSpan(2, 2),
+            wx.GBSpan(1, 1),
+            flag=wx.EXPAND
+        )
+
+        gbs.Add(
+            ButtonsPanel(mainPanel),
+            wx.GBPosition(1,0),
+            wx.GBSpan(1,1),
             flag=wx.EXPAND
         )
 
@@ -28,6 +36,7 @@ class MainFrame(wx.Frame):
         gbs.AddGrowableRow(0, 1)
 
         gbs.Fit(self)
+
 
 app = wx.App(False)
 frame = MainFrame(None, 'Auto Selector')
